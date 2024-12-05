@@ -1,11 +1,11 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
-import { UserSchema } from "./user.schema";
+import { User } from "./user.schema";
 
 @Schema()
-export class FinancialSchema extends Document{
-    @Prop({required: true, type: [{type: 'ObjectId', ref: 'UserSchema'}]})
-    user: UserSchema;
+export class Financial extends Document{
+    @Prop({required: true, type: [{type: 'ObjectId', ref: 'User'}]})
+    user: User;
 
     @Prop({required: true})
     emergency_fund: number;
@@ -20,4 +20,4 @@ export class FinancialSchema extends Document{
     total: number;
 }
 
-export const financialSchema = SchemaFactory.createForClass(FinancialSchema);
+export const financialSchema = SchemaFactory.createForClass(Financial);

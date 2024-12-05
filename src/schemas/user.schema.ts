@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema()
-export class UserSchema{
+export class User{
     @Prop({required: true, maxlength: 25})
     nickname: string;
 
@@ -15,4 +15,4 @@ export class UserSchema{
     token: string;
 }
 
-export const userSchema = SchemaFactory.createForClass(UserSchema);
+export const userSchema = SchemaFactory.createForClass(User);

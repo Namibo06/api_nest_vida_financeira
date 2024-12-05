@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
-import { UserSchema } from "./user.schema";
+import { User } from "./user.schema";
 import { StatusGoals } from "src/enums/status.enum";
 
 @Schema()
-export class GoalsSchema extends Document{
+export class Goals extends Document{
     @Prop({required: true, maxlength: 50})
     title: string;
 
@@ -14,8 +14,8 @@ export class GoalsSchema extends Document{
     @Prop({required: true})
     number_status: number;
 
-    @Prop({required: true, type: [{type: 'ObjectId', ref: 'UserSchema'}]})
-    user: UserSchema;
+    @Prop({required: true, type: [{type: 'ObjectId', ref: 'User'}]})
+    user: User;
 }
 
-export const goalsSchema = SchemaFactory.createForClass(GoalsSchema);
+export const goalsSchema = SchemaFactory.createForClass(Goals);

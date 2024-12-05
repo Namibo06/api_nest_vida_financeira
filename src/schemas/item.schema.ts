@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 import { OperationItem } from "src/enums/operation.enum";
 
 @Schema()
-export class ItemSchema{
+export class Item{
     @Prop({required: true, maxlength: 50})
     name: string;
 
@@ -13,4 +13,4 @@ export class ItemSchema{
     price: number;
 }
 
-export const itemSchema = SchemaFactory.createForClass(ItemSchema);
+export const itemSchema = SchemaFactory.createForClass(Item);
