@@ -1,8 +1,8 @@
-import { CreateUserDTO } from "src/dtos/createUserDTO";
-import { LoginRequestDTO } from "src/dtos/LoginRequestDTO";
-import { LoginResponseDTO } from "src/dtos/LoginResponseDTO";
-import { MessageStatusDTO } from "src/dtos/MessageStatusDTO";
-import { UpdateUserDTO } from "src/dtos/UpdateUserDTO";
+import { CreateUserDTO } from "src/dtos/user/CreateUserDTO";
+import { LoginRequestDTO } from "src/dtos/user/LoginRequestDTO";
+import { LoginResponseDTO } from "src/dtos/user/LoginResponseDTO";
+import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
+import { UpdateUserDTO } from "src/dtos/user/UpdateUserDTO";
 import { User } from "src/schemas/user.schema";
 
 export interface UserInterface{
