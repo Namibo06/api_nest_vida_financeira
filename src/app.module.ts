@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, userSchema } from './schemas/user.schema';
-import { Item, itemSchema } from './schemas/item.schema';
-import { LifeFinancial, lifeFinancialSchema } from './schemas/life_financial.schema';
-import { Financial, financialSchema } from './schemas/financial.schema';
-import { Goals, goalsSchema } from './schemas/goals.schema';
+import { userSchema } from './schemas/user.schema';
+import { itemSchema } from './schemas/item.schema';
+import { lifeFinancialSchema } from './schemas/life_financial.schema';
+import { financialSchema } from './schemas/financial.schema';
+import { goalsSchema } from './schemas/goals.schema';
 
 @Module({
   imports: [
