@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { OperationItem } from "src/enums/operation.enum";
 
 export class CreateItemDTO{
@@ -7,6 +7,7 @@ export class CreateItemDTO{
     name: string;
 
     @IsNotEmpty()
+    @IsEnum(OperationItem, {message : 'O status deve ser: entrada ou saida'})
     operation: OperationItem;
 
     @IsNotEmpty()
