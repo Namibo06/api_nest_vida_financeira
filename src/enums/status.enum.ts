@@ -1,6 +1,6 @@
 export enum StatusGoals{
-    PENSANDO,
-    PRIMEIROS_PASSOS,
-    EM_ANDAMENTO,
-    CONCLUIDO
+    PENSANDO = 'pensando',
+    PRIMEIROS_PASSOS = 'primeiros_passos',
+    EM_ANDAMENTO = 'em_andamento',
+    CONCLUIDO = 'concluido'
 }

@@ -1,4 +1,4 @@
 export enum OperationItem{
-    ENTRADA,
-    SAIDA
+    ENTRADA = 'entrada',
+    SAIDA = 'saida'
 }
