@@ -2,6 +2,7 @@ import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { HandleGlobalException } from 'src/utils/HandleGlobalException';
 import { NotFoundException } from './NotFoundException';
 import { InternalServerErrorException } from './InternalServerErrorException';
+import { UnprocessableEntityException } from './UnprocessableEntityException';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter{
@@ -15,6 +16,8 @@ export class GlobalExceptionFilter implements ExceptionFilter{
             customResponse = HandleGlobalException.handleNotFoundException(exception);
         }else if(exception instanceof InternalServerErrorException){
             customResponse = HandleGlobalException.handleInternalServerErrorException(exception);
+        }else if(exception instanceof UnprocessableEntityException){
+            customResponse = HandleGlobalException.handleUnprocessableEntityException(exception);
         }
 
         response.status(customResponse.status).json(customResponse);
