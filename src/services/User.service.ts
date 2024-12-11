@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CreateUserDTO } from "src/dtos/user/CreateUserDTO";
+import { GetIdAndNicknameDTO } from "src/dtos/user/GetIdAndNicknameDTO";
 import { LoginRequestDTO } from "src/dtos/user/LoginRequestDTO";
 import { LoginResponseDTO } from "src/dtos/user/LoginResponseDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
@@ -13,7 +14,6 @@ export class UserService implements UserInterface{
     constructor(
         private repository: UserRepository
     ){}
-
     async create(data: CreateUserDTO): Promise<MessageStatusDTO> {
         return await this.repository.create(data);
     }
@@ -34,7 +34,7 @@ export class UserService implements UserInterface{
         return await this.repository.delete(id);
     }
     
-    async login(data: LoginRequestDTO): Promise<LoginResponseDTO> {
+    async login(data: LoginRequestDTO): Promise<Boolean> {
         return await this.repository.login(data);
     }
     
@@ -46,4 +46,7 @@ export class UserService implements UserInterface{
         return await this.repository.existsByEmail(email);
     }
     
+    async getOneByEmail(email: string): Promise<GetIdAndNicknameDTO> {
+       return await this.repository.getOneByEmail(email); 
+    }
 }
