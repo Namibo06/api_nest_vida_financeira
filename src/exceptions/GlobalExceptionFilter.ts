@@ -10,7 +10,7 @@ export class GlobalExceptionFilter implements ExceptionFilter{
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
 
-        let customResponse: { status: number; message: string; };
+        let customResponse: { status: number| string ; message: string; };
 
         if(exception instanceof NotFoundException){
             customResponse = HandleGlobalException.handleNotFoundException(exception);
