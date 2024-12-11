@@ -8,9 +8,11 @@ import { lifeFinancialSchema } from './schemas/life_financial.schema';
 import { financialSchema } from './schemas/financial.schema';
 import { goalsSchema } from './schemas/goals.schema';
 
+require('dotenv').config();
+
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/financas_tech'),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     MongooseModule.forFeature([{name: "User", schema: userSchema}]),
     MongooseModule.forFeature([{name: "Item", schema: itemSchema}]),
     MongooseModule.forFeature([{name: "LifeFinancial", schema: lifeFinancialSchema}]),
