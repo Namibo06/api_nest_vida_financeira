@@ -1,7 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateUserDTO } from "src/dtos/user/CreateUserDTO";
+import { LoginRequestDTO } from "src/dtos/user/LoginRequestDTO";
+import { LoginResponseDTO } from "src/dtos/user/LoginResponseDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { UpdateUserDTO } from "src/dtos/user/UpdateUserDTO";
+import { AuthGuard } from "src/middlewares/AuthGuard";
 import { User } from "src/schemas/user.schema";
 import { UserUseCase } from "src/use_cases/UserUseCase";
 
@@ -10,6 +13,19 @@ export class UserController{
     constructor(
         private readonly useCase: UserUseCase
     ){}
+
+    @Post('login')
+    async Login(@Body() data: LoginRequestDTO): Promise<LoginResponseDTO | MessageStatusDTO>{
+        try {
+            return await this.useCase.loginUseCase(data);
+        } catch (error) {
+            return {
+                message: error.getMessage,
+                status: error.getStatusCode,
+                token: null
+            };
+        }
+    }
 
     @Post('create')
     async createUser(@Body() data: CreateUserDTO): Promise<MessageStatusDTO>{
@@ -23,6 +39,7 @@ export class UserController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Get('get_all')
     async getAllUsers(): Promise<User[] | MessageStatusDTO>{
         try {
