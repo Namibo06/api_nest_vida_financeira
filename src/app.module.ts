@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -12,7 +12,19 @@ require('dotenv').config();
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forRootAsync({
+      useFactory: async () => {
+        try {
+          console.log('Attempting to connect to MongoDB...');
+          return {
+            uri: process.env.MONGODB_URI,
+          };
+        } catch (error) {
+          console.error('Error connecting to MongoDB:', error);
+          throw error; 
+        }
+      },
+    }),
     MongooseModule.forFeature([{name: "User", schema: userSchema}]),
     MongooseModule.forFeature([{name: "Item", schema: itemSchema}]),
     MongooseModule.forFeature([{name: "LifeFinancial", schema: lifeFinancialSchema}]),
@@ -22,4 +34,6 @@ require('dotenv').config();
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule{
+
+}
