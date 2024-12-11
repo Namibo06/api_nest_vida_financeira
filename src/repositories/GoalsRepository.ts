@@ -6,7 +6,9 @@ import { GoalsInterface } from "src/interfaces/GoalsInterface";
 import { Goals } from "src/schemas/goals.schema";
 import { CreateGoalsDTO } from "src/dtos/goals/CreateGoalsDTO";
 import { UpdateGoalsDTO } from "src/dtos/goals/UpdateGoalsDTO";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class GoalsRepository implements GoalsInterface{
     constructor(
         @InjectModel(Goals.name) private model: Model<Goals>

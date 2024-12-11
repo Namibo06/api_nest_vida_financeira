@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { CreateUserDTO } from "src/dtos/user/CreateUserDTO";
 import { LoginRequestDTO } from "src/dtos/user/LoginRequestDTO";
 import { LoginResponseDTO } from "src/dtos/user/LoginResponseDTO";
@@ -7,13 +8,14 @@ import { UserInterface } from "src/interfaces/UserInterface";
 import { UserRepository } from "src/repositories/UserRepository";
 import { User } from "src/schemas/user.schema";
 
+@Injectable()
 export class UserService implements UserInterface{
     constructor(
         private repository: UserRepository
     ){}
 
     async create(data: CreateUserDTO): Promise<MessageStatusDTO> {
-       return await this.repository.create(data);
+        return await this.repository.create(data);
     }
     
     async getAll(): Promise<User[]> {

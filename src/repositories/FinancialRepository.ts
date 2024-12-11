@@ -5,12 +5,13 @@ import { FinancialInterface } from "src/interfaces/FinancialInterface";
 import { Financial } from "src/schemas/financial.schema";
 import { Model } from 'mongoose';
 import { InjectModel } from "@nestjs/mongoose";
-import { LifeFinancial } from "src/schemas/life_financial.schema";
 import { InternalServerErrorException } from "src/exceptions/InternalServerErrorException";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class FinancialRepository implements FinancialInterface{
     constructor(
-        @InjectModel(LifeFinancial.name) private model: Model<LifeFinancial>
+        @InjectModel(Financial.name) private model: Model<Financial>
     ){}
 
     async create(data: CreateFinancialDTO): Promise<MessageStatusDTO> {

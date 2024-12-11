@@ -8,9 +8,10 @@ import { UserInterface } from "src/interfaces/UserInterface";
 import { User } from "src/schemas/user.schema";
 import { Model } from 'mongoose';
 import { InternalServerErrorException } from "src/exceptions/InternalServerErrorException";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class UserRepository implements UserInterface{
-
     constructor(
         @InjectModel(User.name) private model: Model<User>
     ){}

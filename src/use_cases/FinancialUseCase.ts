@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { CreateFinancialDTO } from "src/dtos/financial/CreateFinancialDTO";
 import { UpdateFinancialDTO } from "src/dtos/financial/UpdateFinancialDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
@@ -6,6 +7,7 @@ import { UnprocessableEntityException } from "src/exceptions/UnprocessableEntity
 import { Financial } from "src/schemas/financial.schema";
 import { FinancialService } from "src/services/Financial.service";
 
+@Injectable()
 export class FinancialUseCase{
     constructor(
         private service: FinancialService

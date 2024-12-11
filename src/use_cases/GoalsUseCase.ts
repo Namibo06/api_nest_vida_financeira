@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { CreateGoalsDTO } from "src/dtos/goals/CreateGoalsDTO";
 import { UpdateGoalsDTO } from "src/dtos/goals/UpdateGoalsDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
@@ -6,6 +7,7 @@ import { UnprocessableEntityException } from "src/exceptions/UnprocessableEntity
 import { Goals } from "src/schemas/goals.schema";
 import { GoalsService } from "src/services/Goals.service";
 
+@Injectable()
 export class GoalsUseCase{
     constructor(
         private service: GoalsService

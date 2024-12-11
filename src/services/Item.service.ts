@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
 import { UpdateItemDTO } from "src/dtos/item/UpdateItemDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
@@ -5,6 +6,7 @@ import { ItemInterface } from "src/interfaces/ItemInterface";
 import { ItemRepository } from "src/repositories/ItemRepository";
 import { Item } from "src/schemas/item.schema";
 
+@Injectable()
 export class ItemService implements ItemInterface{
     constructor(
         private repository: ItemRepository

@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { CreateFinancialDTO } from "src/dtos/financial/CreateFinancialDTO";
 import { UpdateFinancialDTO } from "src/dtos/financial/UpdateFinancialDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
@@ -5,6 +6,7 @@ import { FinancialInterface } from "src/interfaces/FinancialInterface";
 import { FinancialRepository } from "src/repositories/FinancialRepository";
 import { Financial } from "src/schemas/financial.schema";
 
+@Injectable()
 export class FinancialService implements FinancialInterface{
     constructor(
         private repository: FinancialRepository

@@ -6,7 +6,9 @@ import { LifeFinancialInterface } from "src/interfaces/LifeFinancialInterface";
 import { LifeFinancial } from "src/schemas/life_financial.schema";
 import { Model } from 'mongoose';
 import { InternalServerErrorException } from "src/exceptions/InternalServerErrorException";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class LifeFinancialRepository implements LifeFinancialInterface{
     constructor(
         @InjectModel(LifeFinancial.name) private model: Model<LifeFinancial>

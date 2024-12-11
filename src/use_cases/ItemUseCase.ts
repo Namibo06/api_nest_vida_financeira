@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
 import { UpdateItemDTO } from "src/dtos/item/UpdateItemDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
@@ -6,6 +7,7 @@ import { UnprocessableEntityException } from "src/exceptions/UnprocessableEntity
 import { Item } from "src/schemas/item.schema";
 import { ItemService } from "src/services/Item.service";
 
+@Injectable()
 export class ItemUseCase{
     constructor(
         private service: ItemService

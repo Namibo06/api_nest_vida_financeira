@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from 'mongoose';
 import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
@@ -7,6 +8,7 @@ import { InternalServerErrorException } from "src/exceptions/InternalServerError
 import { ItemInterface } from "src/interfaces/ItemInterface";
 import { Item } from "src/schemas/item.schema";
 
+@Injectable()
 export class ItemRepository implements ItemInterface{
 
     constructor(

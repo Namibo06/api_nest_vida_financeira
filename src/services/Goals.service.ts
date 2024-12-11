@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { CreateGoalsDTO } from "src/dtos/goals/CreateGoalsDTO";
 import { UpdateGoalsDTO } from "src/dtos/goals/UpdateGoalsDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
@@ -5,6 +6,7 @@ import { GoalsInterface } from "src/interfaces/GoalsInterface";
 import { GoalsRepository } from "src/repositories/GoalsRepository";
 import { Goals } from "src/schemas/goals.schema";
 
+@Injectable()
 export class GoalsService implements GoalsInterface{
     constructor(
         private repository: GoalsRepository

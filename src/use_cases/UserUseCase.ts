@@ -1,3 +1,4 @@
+import { Injectable } from "@nestjs/common";
 import { CreateUserDTO } from "src/dtos/user/CreateUserDTO";
 import { LoginRequestDTO } from "src/dtos/user/LoginRequestDTO";
 import { LoginResponseDTO } from "src/dtos/user/LoginResponseDTO";
@@ -8,12 +9,14 @@ import { UnprocessableEntityException } from "src/exceptions/UnprocessableEntity
 import { User } from "src/schemas/user.schema";
 import { UserService } from "src/services/User.service";
 
+@Injectable()
 export class UserUseCase{
     constructor(
-        private service: UserService
+        private readonly service: UserService
     ){}
 
     async createUserUseCase(data: CreateUserDTO): Promise<MessageStatusDTO>{
+        console.log("passei na use case antes do if");
         if(
             data.email !== "" || data.email !== null ||
             data.nickname !== "" || data.nickname !== null ||
