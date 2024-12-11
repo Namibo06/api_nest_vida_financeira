@@ -8,26 +8,28 @@ import { UserInterface } from "src/interfaces/UserInterface";
 import { User } from "src/schemas/user.schema";
 import { Model } from 'mongoose';
 import { InternalServerErrorException } from "src/exceptions/InternalServerErrorException";
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
+import * as bycrpt from 'bcryptjs';
+import { NotFoundException } from "src/exceptions/NotFoundException";
+import { GetIdAndNicknameDTO } from "src/dtos/user/GetIdAndNicknameDTO";
 
 @Injectable()
 export class UserRepository implements UserInterface{
     constructor(
         @InjectModel(User.name) private model: Model<User>
     ){}
-
     async create(data: CreateUserDTO): Promise<MessageStatusDTO> {
-        const user = new this.model(data);
-        const createdUser = await user.save();
-
-        if(!createdUser){
-            throw new InternalServerErrorException("Não foi possivel salvar usuário");
-        }
-
-        return {
-            message: 'Usuário criado',
-            status: 201
-        };
+        try {
+            const user = new this.model(data);
+            await user.save();
+      
+            return {
+              message: 'Usuário criado',
+              status: 201,
+            };
+          } catch (error) {
+            throw new InternalServerErrorException("Não foi possível salvar o usuário");
+          }
     }
 
     async getAll(): Promise<User[]> {
@@ -62,8 +64,23 @@ export class UserRepository implements UserInterface{
         };
     }
 
-    async login(data: LoginRequestDTO): Promise<LoginResponseDTO> {
-        throw new Error("Method not implemented.");
+    async login(data: LoginRequestDTO): Promise<Boolean> {
+        const { email,password } = data;
+
+        const userEmailAndPassword = this.model.findOne({
+            email: email
+        });
+
+        if(!userEmailAndPassword){
+            throw new NotFoundException('Usuário não encontrado');
+        }
+
+        const verifyPasswords = await bycrpt.compare(password,(await userEmailAndPassword).password);
+        if(!verifyPasswords){
+            throw new BadRequestException('Senhas são diferentes');
+        }
+
+        return true;
     }
 
     async existsById(id: string): Promise<Boolean> {
@@ -73,5 +90,11 @@ export class UserRepository implements UserInterface{
     async existsByEmail(email: string): Promise<Boolean> {
         return await this.model.findOne({email: email}) ? true : false;
     }
-    
+
+    async getOneByEmail(email: string): Promise<GetIdAndNicknameDTO> {
+        return await this.model.findOne(
+            {email: email},
+            '_id nickname'
+        );
+    }
 }
