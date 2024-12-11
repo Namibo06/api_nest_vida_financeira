@@ -3,6 +3,8 @@ import { HandleGlobalException } from 'src/utils/HandleGlobalException';
 import { NotFoundException } from './NotFoundException';
 import { InternalServerErrorException } from './InternalServerErrorException';
 import { UnprocessableEntityException } from './UnprocessableEntityException';
+import { UnauthorizedException } from './UnauthorizedException';
+import { ForbiddenException } from './ForbiddenException';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -18,6 +20,10 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       customResponse = HandleGlobalException.handleInternalServerErrorException(exception);
     } else if (exception instanceof UnprocessableEntityException) {
       customResponse = HandleGlobalException.handleUnprocessableEntityException(exception);
+    } else if(exception instanceof UnauthorizedException){
+      customResponse = HandleGlobalException.handleUnauthorizedException(exception);
+    } else if(exception instanceof ForbiddenException){
+      customResponse = HandleGlobalException.handleForbbidenException(exception);
     } else {
       customResponse = {
         status: HttpStatus.INTERNAL_SERVER_ERROR,
