@@ -17,8 +17,8 @@ export class UserController{
             return await this.useCase.createUserUseCase(data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.getMessage,
+                status: error.getStatusCode
             };
         }
     }
@@ -29,8 +29,8 @@ export class UserController{
             return await this.useCase.getAllUsersUseCase();
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.getMessage,
+                status: error.getStatusCode
             };
         }
     }
@@ -41,8 +41,8 @@ export class UserController{
             return await this.useCase.getOneUserUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.getMessage,
+                status: error.getStatusCode
             };
         }
     }
@@ -53,8 +53,8 @@ export class UserController{
             return await this.useCase.updateUserUseCase(id,data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.getMessage,
+                status: error.getStatusCode
             };
         }
     }
@@ -65,8 +65,8 @@ export class UserController{
             return await this.useCase.deleteUserUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.getMessage,
+                status: error.getStatusCode
             };
         }
     }
