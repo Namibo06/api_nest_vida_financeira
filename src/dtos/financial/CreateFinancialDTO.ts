@@ -1,9 +1,10 @@
-import { IsNegative, IsNotEmpty, IsNumber } from "class-validator";
+import { IsNegative, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { User } from "src/schemas/user.schema";
 
 export class CreateFinancialDTO{
     @IsNotEmpty()
-    user: User;
+    @IsString()
+    user: string;
 
     @IsNotEmpty()
     @IsNumber()

@@ -1,5 +1,6 @@
 
 import { CreateFinancialDTO } from "src/dtos/financial/CreateFinancialDTO";
+import { GetOneFinancialDTO } from "src/dtos/financial/GetOneFinancialDTO";
 import { UpdateFinancialDTO } from "src/dtos/financial/UpdateFinancialDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { Financial } from "src/schemas/financial.schema";
@@ -12,4 +13,5 @@ export interface FinancialInterface{
     update(id: string, data: UpdateFinancialDTO): Promise<MessageStatusDTO>;
     delete(id: string):Promise<MessageStatusDTO>;
     existsById(id: string): Promise<Boolean>;
+    existsByUserId(id: string): Promise<Boolean>;
 }

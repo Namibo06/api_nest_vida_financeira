@@ -1,5 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { CreateFinancialDTO } from "src/dtos/financial/CreateFinancialDTO";
+import { GetOneFinancialDTO } from "src/dtos/financial/GetOneFinancialDTO";
 import { UpdateFinancialDTO } from "src/dtos/financial/UpdateFinancialDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { NotFoundException } from "src/exceptions/NotFoundException";
@@ -22,7 +23,10 @@ export class FinancialUseCase{
             throw new UnprocessableEntityException("Campos obrigatórios vazios");
         }
 
-        return await this.service.create(data);
+        const existsByUserId = await this.service.existsByUserId(data.user);
+        if(!existsByUserId){
+            return await this.service.create(data);
+        }
     }
 
     async getAllFinancialsUseCase(): Promise<Financial[]>{

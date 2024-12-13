@@ -5,6 +5,7 @@ import { InternalServerErrorException } from './InternalServerErrorException';
 import { UnprocessableEntityException } from './UnprocessableEntityException';
 import { UnauthorizedException } from './UnauthorizedException';
 import { ForbiddenException } from './ForbiddenException';
+import { ConflictException } from './ConflictException';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
@@ -24,6 +25,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       customResponse = HandleGlobalException.handleUnauthorizedException(exception);
     } else if(exception instanceof ForbiddenException){
       customResponse = HandleGlobalException.handleForbbidenException(exception);
+    } else if(exception instanceof ConflictException){
+      customResponse = HandleGlobalException.handleConflictException(exception);
     } else {
       customResponse = {
         status: HttpStatus.INTERNAL_SERVER_ERROR,

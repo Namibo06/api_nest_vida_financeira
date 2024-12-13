@@ -7,6 +7,8 @@ import { Model } from 'mongoose';
 import { InjectModel } from "@nestjs/mongoose";
 import { InternalServerErrorException } from "src/exceptions/InternalServerErrorException";
 import { Injectable } from "@nestjs/common";
+import { NotFoundException } from "src/exceptions/NotFoundException";
+import { GetOneFinancialDTO } from "src/dtos/financial/GetOneFinancialDTO";
 
 @Injectable()
 export class FinancialRepository implements FinancialInterface{
@@ -31,8 +33,12 @@ export class FinancialRepository implements FinancialInterface{
         return await this.model.find();
     }
 
-    async getOne(id: string): Promise<Financial> {
-        return await this.model.findById(id);
+    async getOne(id: string): Promise<Financial | null> {
+        const financial = await this.model.findOne({ user: id });
+        if (financial) {
+            return financial;
+        }
+        return null; 
     }
 
     async update(id: string, data: UpdateFinancialDTO): Promise<MessageStatusDTO> {
@@ -60,8 +66,16 @@ export class FinancialRepository implements FinancialInterface{
     }
 
     async existsById(id: string): Promise<Boolean> {
-        const existsFinancial = await this.model.findById(id);
+        const existsFinancial = await this.model.findOne({ user: id });
+        console.log(existsFinancial);
         return existsFinancial ? true : false;
     }
     
+    async existsByUserId(id: string): Promise<Boolean> {
+        const existsFinancialByUserId = await this.model.findOne({ user: id });
+        if(existsFinancialByUserId === null){
+            return false;
+        }
+        return existsFinancialByUserId ? true : false;
+    }
 }

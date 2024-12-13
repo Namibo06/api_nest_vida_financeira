@@ -1,14 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateFinancialDTO } from "src/dtos/financial/CreateFinancialDTO";
+import { GetOneFinancialDTO } from "src/dtos/financial/GetOneFinancialDTO";
 import { UpdateFinancialDTO } from "src/dtos/financial/UpdateFinancialDTO";
-import { CreateLifeFinancialDTO } from "src/dtos/life_financial/CreateLifeFinancialDTO";
-import { UpdateLifeFinancialDTO } from "src/dtos/life_financial/UpdateLifeFinancialDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { AuthGuard } from "src/middlewares/AuthGuard";
 import { Financial } from "src/schemas/financial.schema";
-import { LifeFinancial } from "src/schemas/life_financial.schema";
 import { FinancialUseCase } from "src/use_cases/FinancialUseCase";
-import { LifeFinancialUseCase } from "src/use_cases/LifeFinancialUseCase";
 
 @Controller('financial')
 export class FinancialController{

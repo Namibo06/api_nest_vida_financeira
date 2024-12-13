@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { FinancialController } from 'src/controllers/Life.controller';
+import { FinancialController } from 'src/controllers/Financial.controller';
 import { FinancialRepository } from 'src/repositories/FinancialRepository';
 import { financialSchema } from 'src/schemas/financial.schema';
 import { FinancialService } from 'src/services/Financial.service';

@@ -1,4 +1,5 @@
 import { HttpStatus } from "@nestjs/common";
+import { ConflictException } from "src/exceptions/ConflictException";
 import { ForbiddenException } from "src/exceptions/ForbiddenException";
 import { InternalServerErrorException } from "src/exceptions/InternalServerErrorException";
 import { NotFoundException } from "src/exceptions/NotFoundException";
@@ -38,6 +39,13 @@ export class HandleGlobalException{
         return {
             message: exception.message,
             status: HttpStatus.FORBIDDEN
+        };
+    }
+
+    static handleConflictException(exception: ConflictException){
+        return {
+            message: exception.message,
+            status: HttpStatus.CONFLICT
         };
     }
 }
