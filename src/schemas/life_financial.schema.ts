@@ -3,7 +3,7 @@ import { Item } from "./item.schema";
 import { User } from "./user.schema";
 import { Document } from 'mongoose';
 
-@Schema()
+@Schema({ timestamps: true })
 export class LifeFinancial extends Document{
     @Prop({required: true})
     input_values: number;

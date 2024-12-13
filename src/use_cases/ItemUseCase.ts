@@ -15,8 +15,8 @@ export class ItemUseCase{
 
     async createItemUseCase(data: CreateItemDTO): Promise<MessageStatusDTO>{
         if(
-            data.name !== "" || data.name !== null ||
-            data.operation !== null || data.price !== null 
+            data.name === "" || data.name === null ||
+            data.operation === null || data.price === null 
         ){
             throw new UnprocessableEntityException("Campos obrigatórios vazios");
         }

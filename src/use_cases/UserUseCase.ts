@@ -10,6 +10,7 @@ import { User } from "src/schemas/user.schema";
 import { UserService } from "src/services/User.service";
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from "@nestjs/jwt";
+import { get } from "http";
 
 @Injectable()
 export class UserUseCase{
@@ -89,12 +90,15 @@ export class UserUseCase{
             username: getIdAndNickname.nickname
         }
 
+        console.log('Id'+getIdAndNickname._id);
+
         const token = await this.jwtService.signAsync(payload);
 
         return new LoginResponseDTO(
             "Login realizado com sucesso",
             200,
-            token
+            token,
+            getIdAndNickname._id
         );
     }
 }

@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 import { User } from "./user.schema";
 
-@Schema()
+@Schema({ timestamps: true })
 export class Financial extends Document{
     @Prop({required: true, type: [{type: 'ObjectId', ref: 'User'}]})
     user: User;

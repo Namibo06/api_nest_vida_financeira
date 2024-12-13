@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
 import { UpdateItemDTO } from "src/dtos/item/UpdateItemDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
+import { AuthGuard } from "src/middlewares/AuthGuard";
 import { Item } from "src/schemas/item.schema";
 import { ItemUseCase } from "src/use_cases/ItemUseCase";
 
@@ -11,6 +12,7 @@ export class ItemController{
         private readonly useCase: ItemUseCase
     ){}
 
+    @UseGuards(AuthGuard)
     @Post('create')
     async createItem(@Body() data: CreateItemDTO): Promise<MessageStatusDTO>{
         try {
@@ -23,6 +25,7 @@ export class ItemController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Get('get_all')
     async getAllItems(): Promise<Item[] | MessageStatusDTO>{
         try {
@@ -35,6 +38,7 @@ export class ItemController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Get('get_one/:id')
     async getOneItem(@Param('id') id: string): Promise<Item | MessageStatusDTO>{
         try {
@@ -47,6 +51,7 @@ export class ItemController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Patch('update/:id')
     async updateItem(@Param('id') id: string, @Body() data: UpdateItemDTO): Promise<MessageStatusDTO>{
         try {
@@ -59,6 +64,7 @@ export class ItemController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Delete('destroy/:id')
     async deleteItem(@Param('id') id: string): Promise<MessageStatusDTO>{
         try {

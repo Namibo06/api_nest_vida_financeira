@@ -3,18 +3,18 @@ import { Document } from "mongoose";
 import { User } from "./user.schema";
 import { StatusGoals } from "src/enums/status.enum";
 
-@Schema()
+@Schema({ timestamps: true })
 export class Goals extends Document{
-    @Prop({required: true, maxlength: 50})
+    @Prop({required: false, maxlength: 50})
     title: string;
 
-    @Prop({required: true})
+    @Prop({required: false})
     status: StatusGoals;
 
-    @Prop({required: true})
+    @Prop({required: false})
     number_status: number;
 
-    @Prop({required: true, type: [{type: 'ObjectId', ref: 'User'}]})
+    @Prop({required: false, type: [{type: 'ObjectId', ref: 'User'}]})
     user: User;
 }
 

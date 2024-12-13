@@ -52,6 +52,7 @@ export class UserController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Get('get_one/:id')
     async getOneUser(@Param('id') id: string): Promise<User | MessageStatusDTO>{
         try {
@@ -64,6 +65,7 @@ export class UserController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Patch('update/:id')
     async updateUser(@Param('id') id: string, @Body() data: UpdateUserDTO): Promise<MessageStatusDTO>{
         try {
@@ -75,7 +77,8 @@ export class UserController{
             };
         }
     }
-
+    
+    @UseGuards(AuthGuard)
     @Delete('destroy/:id')
     async deleteUser(@Param('id') id: string): Promise<MessageStatusDTO>{
         try {

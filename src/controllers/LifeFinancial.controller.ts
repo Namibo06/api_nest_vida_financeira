@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateLifeFinancialDTO } from "src/dtos/life_financial/CreateLifeFinancialDTO";
 import { UpdateLifeFinancialDTO } from "src/dtos/life_financial/UpdateLifeFinancialDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
+import { AuthGuard } from "src/middlewares/AuthGuard";
 import { LifeFinancial } from "src/schemas/life_financial.schema";
 import { LifeFinancialUseCase } from "src/use_cases/LifeFinancialUseCase";
 
@@ -11,6 +12,7 @@ export class LifeFinancialController{
         private readonly useCase: LifeFinancialUseCase
     ){}
 
+    @UseGuards(AuthGuard)
     @Post('create')
     async createLifeFinancial(@Body() data: CreateLifeFinancialDTO): Promise<MessageStatusDTO>{
         try {
@@ -23,6 +25,7 @@ export class LifeFinancialController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Get('get_all')
     async getAllLifeFinancials(): Promise<LifeFinancial[] | MessageStatusDTO>{
         try {
@@ -35,6 +38,7 @@ export class LifeFinancialController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Get('get_one/:id')
     async getOneLifeFinancial(@Param('id') id: string): Promise<LifeFinancial | MessageStatusDTO>{
         try {
@@ -47,6 +51,7 @@ export class LifeFinancialController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Patch('update/:id')
     async updateLifeFinancial(@Param('id') id: string, @Body() data: UpdateLifeFinancialDTO): Promise<MessageStatusDTO>{
         try {
@@ -59,14 +64,15 @@ export class LifeFinancialController{
         }
     }
 
+    @UseGuards(AuthGuard)
     @Delete('destroy/:id')
     async deleteLifeFinancial(@Param('id') id: string): Promise<MessageStatusDTO>{
         try {
             return await this.useCase.deleteLifeFinancialUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.getMessage,
+                status: error.getStatusCode
             };
         }
     }

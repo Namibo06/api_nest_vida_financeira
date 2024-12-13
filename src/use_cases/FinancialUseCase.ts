@@ -15,9 +15,9 @@ export class FinancialUseCase{
 
     async createFinancialUseCase(data: CreateFinancialDTO): Promise<MessageStatusDTO>{
         if(
-            data.emergency_fund !== null || data.variable_income !== null ||
-            data.fixed_income !== null || data.user !== null ||
-            data.total !== null
+            data.emergency_fund === null || data.variable_income === null ||
+            data.fixed_income === null || data.user === null ||
+            data.total === null
         ){
             throw new UnprocessableEntityException("Campos obrigatórios vazios");
         }

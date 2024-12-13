@@ -7,6 +7,7 @@ import { Goals } from "src/schemas/goals.schema";
 import { CreateGoalsDTO } from "src/dtos/goals/CreateGoalsDTO";
 import { UpdateGoalsDTO } from "src/dtos/goals/UpdateGoalsDTO";
 import { Injectable } from "@nestjs/common";
+import { StatusGoals } from "src/enums/status.enum";
 
 @Injectable()
 export class GoalsRepository implements GoalsInterface{
@@ -17,6 +18,7 @@ export class GoalsRepository implements GoalsInterface{
     async create(data: CreateGoalsDTO): Promise<MessageStatusDTO> {
         const goals = new this.model(data);
         const createdGoals = goals.save();
+
         if(!createdGoals){
             throw new InternalServerErrorException("Não foi possivel criar uma meta");
         }

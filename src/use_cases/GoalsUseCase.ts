@@ -15,9 +15,7 @@ export class GoalsUseCase{
 
     async createGoalslUseCase(data: CreateGoalsDTO): Promise<MessageStatusDTO>{
         if(
-            data.title !== "" || data.title !== null ||
-            data.user !== null || data.status !== null ||
-            data.number_status !== null
+            data.title === "" || data.title === null
         ){
             throw new UnprocessableEntityException("Campos obrigatórios vazios");
         }
