@@ -4,7 +4,7 @@ import { User } from "./user.schema";
 
 @Schema({ timestamps: true })
 export class Item{
-    @Prop({required: true, maxlength: 20})
+    @Prop({required: true, maxlength: 25})
     name: string;
 
     @Prop({required: true})
