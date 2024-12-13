@@ -6,7 +6,7 @@ import { LifeFinancial } from "src/schemas/life_financial.schema";
 
 export interface LifeFinancialInterface{
     create(data: CreateLifeFinancialDTO): Promise<MessageStatusDTO>;
-    getAll(): Promise<LifeFinancial[]>;
+    getAll(userId: string): Promise<LifeFinancial[]>;
     getOne(id: string): Promise<LifeFinancial>;
     update(id: string, data: UpdateLifeFinancialDTO): Promise<MessageStatusDTO>;
     delete(id: string):Promise<MessageStatusDTO>;

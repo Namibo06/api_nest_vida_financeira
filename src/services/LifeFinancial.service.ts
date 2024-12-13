@@ -16,8 +16,8 @@ export class LifeFinancialService implements LifeFinancialInterface{
        return await this.repository.create(data);
     }
     
-    async getAll(): Promise<LifeFinancial[]> {
-        return await this.repository.getAll();
+    async getAll(userId: string): Promise<LifeFinancial[]> {
+        return await this.repository.getAll(userId);
     }
     
     async getOne(id: string): Promise<LifeFinancial> {

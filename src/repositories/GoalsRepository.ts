@@ -7,7 +7,6 @@ import { Goals } from "src/schemas/goals.schema";
 import { CreateGoalsDTO } from "src/dtos/goals/CreateGoalsDTO";
 import { UpdateGoalsDTO } from "src/dtos/goals/UpdateGoalsDTO";
 import { Injectable } from "@nestjs/common";
-import { StatusGoals } from "src/enums/status.enum";
 
 @Injectable()
 export class GoalsRepository implements GoalsInterface{
@@ -29,8 +28,9 @@ export class GoalsRepository implements GoalsInterface{
         };
     }
 
-    async getAll(): Promise<Goals[]> {
-        return await this.model.find();
+    async getAll(userId: string): Promise<Goals[]> {
+        console.log(userId);
+        return await this.model.find({ user: userId });
     }
 
     async getOne(id: string): Promise<Goals> {

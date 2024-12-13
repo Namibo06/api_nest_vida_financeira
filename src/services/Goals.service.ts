@@ -16,8 +16,8 @@ export class GoalsService implements GoalsInterface{
        return await this.repository.create(data);
     }
     
-    async getAll(): Promise<Goals[]> {
-        return await this.repository.getAll();
+    async getAll(userId: string): Promise<Goals[]> {
+        return await this.repository.getAll(userId);
     }
     
     async getOne(id: string): Promise<Goals> {

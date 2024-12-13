@@ -5,6 +5,7 @@ import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
 import { UpdateItemDTO } from "src/dtos/item/UpdateItemDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { InternalServerErrorException } from "src/exceptions/InternalServerErrorException";
+import { NotFoundException } from "src/exceptions/NotFoundException";
 import { ItemInterface } from "src/interfaces/ItemInterface";
 import { Item } from "src/schemas/item.schema";
 
@@ -28,8 +29,13 @@ export class ItemRepository implements ItemInterface{
         };
     }
 
-    async getAll(): Promise<Item[]> {
-        return await this.model.find();
+    async getAll(userId: string): Promise<Item[]> {
+        const items = await this.model.find({ user: userId });
+
+        if(items.length === 0){
+            throw new NotFoundException("Items não encontrados");
+        }
+        return items;
     }
 
     async getOne(id: string): Promise<Item> {

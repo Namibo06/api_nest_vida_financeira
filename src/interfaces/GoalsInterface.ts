@@ -6,7 +6,7 @@ import { Goals } from "src/schemas/goals.schema";
 
 export interface GoalsInterface{
     create(data: CreateGoalsDTO): Promise<MessageStatusDTO>;
-    getAll(): Promise<Goals[]>;
+    getAll(userId: string): Promise<Goals[]>;
     getOne(id: string): Promise<Goals>;
     update(id: string, data: UpdateGoalsDTO): Promise<MessageStatusDTO>;
     delete(id: string):Promise<MessageStatusDTO>;

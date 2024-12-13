@@ -7,6 +7,7 @@ import { LifeFinancial } from "src/schemas/life_financial.schema";
 import { Model } from 'mongoose';
 import { InternalServerErrorException } from "src/exceptions/InternalServerErrorException";
 import { Injectable } from "@nestjs/common";
+import { NotFoundException } from "src/exceptions/NotFoundException";
 
 @Injectable()
 export class LifeFinancialRepository implements LifeFinancialInterface{
@@ -27,8 +28,13 @@ export class LifeFinancialRepository implements LifeFinancialInterface{
         };
     }
 
-    async getAll(): Promise<LifeFinancial[]> {
-        return await this.model.find();
+    async getAll(userId: string): Promise<LifeFinancial[]> {
+        const lifeFinancials = await this.model.find({ user:userId });
+        if(lifeFinancials.length === 0){
+            throw new NotFoundException('Items não encontrados');
+        }
+
+        return lifeFinancials;
     }
 
     async getOne(id: string): Promise<LifeFinancial> {
