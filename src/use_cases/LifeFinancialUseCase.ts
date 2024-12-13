@@ -24,8 +24,8 @@ export class LifeFinancialUseCase{
         return await this.service.create(data);
     }
 
-    async getAllLifeFinancialsUseCase(): Promise<LifeFinancial[]>{
-        return await this.service.getAll();
+    async getAllLifeFinancialsUseCase(userId: string): Promise<LifeFinancial[]>{
+        return await this.service.getAll(userId);
     }
 
     async getOneLifeFinancialUseCase(id: string): Promise<LifeFinancial>{

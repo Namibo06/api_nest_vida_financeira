@@ -23,8 +23,8 @@ export class GoalsUseCase{
         return await this.service.create(data);
     }
 
-    async getAllGoalsUseCase(): Promise<Goals[]>{
-        return await this.service.getAll();
+    async getAllGoalsUseCase(userId:string): Promise<Goals[]>{
+        return await this.service.getAll(userId);
     }
 
     async getOneGoalsUseCase(id: string): Promise<Goals>{

@@ -24,8 +24,8 @@ export class ItemUseCase{
         return await this.service.create(data);
     }
 
-    async getAllItemsUseCase(): Promise<Item[]>{
-        return await this.service.getAll();
+    async getAllItemsUseCase(userId: string): Promise<Item[]>{
+        return await this.service.getAll(userId);
     }
 
     async getOneItemUseCase(id: string): Promise<Item>{
