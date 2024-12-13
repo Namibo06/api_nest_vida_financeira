@@ -19,21 +19,21 @@ export class GoalsController{
             return await this.useCase.createGoalslUseCase(data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
 
     @UseGuards(AuthGuard)
-    @Get('get_all')
-    async getAllGoals(): Promise<Goals[] | MessageStatusDTO>{
+    @Get('get_all/:id')
+    async getAllGoals(@Param('id') userId: string): Promise<Goals[] | MessageStatusDTO>{
         try {
-            return await this.useCase.getAllGoalsUseCase();
+            return await this.useCase.getAllGoalsUseCase(userId);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -45,8 +45,8 @@ export class GoalsController{
             return await this.useCase.getOneGoalsUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -58,8 +58,8 @@ export class GoalsController{
             return await this.useCase.updateGoalsUseCase(id,data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -71,8 +71,8 @@ export class GoalsController{
             return await this.useCase.deleteGoalsUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }

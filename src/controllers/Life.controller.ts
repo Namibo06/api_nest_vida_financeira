@@ -23,8 +23,8 @@ export class FinancialController{
             return await this.useCase.createFinancialUseCase(data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -36,8 +36,8 @@ export class FinancialController{
             return await this.useCase.getAllFinancialsUseCase();
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -49,8 +49,8 @@ export class FinancialController{
             return await this.useCase.getOneFinancialUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -62,8 +62,8 @@ export class FinancialController{
             return await this.useCase.updateFinancialUseCase(id,data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -75,8 +75,8 @@ export class FinancialController{
             return await this.useCase.deleteFinancialUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }

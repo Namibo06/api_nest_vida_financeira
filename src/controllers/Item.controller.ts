@@ -18,22 +18,27 @@ export class ItemController{
         try {
             return await this.useCase.createItemUseCase(data);
         } catch (error) {
+            console.log(error);
+            console.log(error.response);
+            console.log(error.status);
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
 
     @UseGuards(AuthGuard)
-    @Get('get_all')
-    async getAllItems(): Promise<Item[] | MessageStatusDTO>{
+    @Get('get_all/:id')
+    async getAllItems(@Param('id') userId: string): Promise<Item[] | MessageStatusDTO>{
         try {
-            return await this.useCase.getAllItemsUseCase();
+            return await this.useCase.getAllItemsUseCase(userId);
         } catch (error) {
+            console.log(error.response);
+            console.log(error.status);
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -44,9 +49,10 @@ export class ItemController{
         try {
             return await this.useCase.getOneItemUseCase(id);
         } catch (error) {
+            console.log(error);
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -58,8 +64,8 @@ export class ItemController{
             return await this.useCase.updateItemUseCase(id,data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -71,8 +77,8 @@ export class ItemController{
             return await this.useCase.deleteItemUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }

@@ -19,21 +19,22 @@ export class LifeFinancialController{
             return await this.useCase.createLifeFinancialUseCase(data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
 
     @UseGuards(AuthGuard)
-    @Get('get_all')
-    async getAllLifeFinancials(): Promise<LifeFinancial[] | MessageStatusDTO>{
+    @Get('get_all/:id')
+    async getAllLifeFinancials(@Param('id') userId: string): Promise<LifeFinancial[] | MessageStatusDTO>{
         try {
-            return await this.useCase.getAllLifeFinancialsUseCase();
+            return await this.useCase.getAllLifeFinancialsUseCase(userId);
         } catch (error) {
+            console.log("Erro: "+error);
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -45,8 +46,8 @@ export class LifeFinancialController{
             return await this.useCase.getOneLifeFinancialUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -58,8 +59,8 @@ export class LifeFinancialController{
             return await this.useCase.updateLifeFinancialUseCase(id,data);
         } catch (error) {
             return {
-                message: error.getMessage(),
-                status: error.getStatusCode()
+                message: error.response,
+                status: error.status
             };
         }
     }
@@ -71,8 +72,8 @@ export class LifeFinancialController{
             return await this.useCase.deleteLifeFinancialUseCase(id);
         } catch (error) {
             return {
-                message: error.getMessage,
-                status: error.getStatusCode
+                message: error.response,
+                status: error.status
             };
         }
     }
