@@ -25,12 +25,10 @@ export class AuthGuard implements CanActivate{
                     secret: process.env.SECRET_KEY_JWT
                 }
             );
-
             request['user'] = payload;
        } catch {
             throw new ForbiddenException('Acesso Negado');
        }
-
        return true;
     }
     
