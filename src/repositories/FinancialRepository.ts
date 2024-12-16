@@ -43,14 +43,14 @@ export class FinancialRepository implements FinancialInterface{
 
     async update(id: string, data: UpdateFinancialDTO): Promise<MessageStatusDTO> {
         const updatedFinancial = await this.model.findByIdAndUpdate(id, data,{new: true});
-        if(!updatedFinancial){
-            throw new InternalServerErrorException("Não foi possivel atualizar um financeiro");
+        if(updatedFinancial){
+            return {
+                message: "Financeiro atualizado",
+                status: 200
+            };
         }
 
-        return {
-            message: "Financeiro atualizado",
-            status: 200
-        };
+        return null;
     }
 
     async delete(id: string): Promise<MessageStatusDTO> {
@@ -67,7 +67,6 @@ export class FinancialRepository implements FinancialInterface{
 
     async existsById(id: string): Promise<Boolean> {
         const existsFinancial = await this.model.findOne({ user: id });
-        console.log(existsFinancial);
         return existsFinancial ? true : false;
     }
     

@@ -1,6 +1,5 @@
-import { ConflictException, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { CreateFinancialDTO } from "src/dtos/financial/CreateFinancialDTO";
-import { GetOneFinancialDTO } from "src/dtos/financial/GetOneFinancialDTO";
 import { UpdateFinancialDTO } from "src/dtos/financial/UpdateFinancialDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { NotFoundException } from "src/exceptions/NotFoundException";
@@ -36,19 +35,16 @@ export class FinancialUseCase{
     async getOneFinancialUseCase(id: string): Promise<Financial>{
         const existsFinancial = await this.service.existsById(id);
         if(!existsFinancial){
-            throw new NotFoundException("Financeiro não encontrado");
+            return null;
         }
-
         return await this.service.getOne(id);
     }
 
     async updateFinancialUseCase(id: string, data: UpdateFinancialDTO): Promise<MessageStatusDTO>{
         const existsFinancial = await this.service.existsById(id);
         if(!existsFinancial){
-            throw new NotFoundException("Financeiro não encontrado");
+            return await this.service.update(id,data);
         }
-
-        return await this.service.update(id,data);
     }
 
     async deleteFinancialUseCase(id: string): Promise<MessageStatusDTO>{
@@ -56,7 +52,6 @@ export class FinancialUseCase{
         if(!existsFinancial){
             throw new NotFoundException("Financeiro não encontrado");
         }
-
         return await this.service.delete(id);
     }
 }
