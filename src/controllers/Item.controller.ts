@@ -29,10 +29,10 @@ export class ItemController{
     }
 
     @UseGuards(AuthGuard)
-    @Get('get_all/:id')
-    async getAllItems(@Param('id') userId: string): Promise<Item[] | MessageStatusDTO>{
+    @Get('get_all/:id/:month')
+    async getAllItems(@Param('id') userId: string, @Param('month') monthActual: string): Promise<Item[] | MessageStatusDTO>{
         try {
-            return await this.useCase.getAllItemsUseCase(userId);
+            return await this.useCase.getAllItemsUseCase(userId,monthActual);
         } catch (error) {
             console.log(error.response);
             console.log(error.status);

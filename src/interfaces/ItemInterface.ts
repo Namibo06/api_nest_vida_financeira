@@ -6,7 +6,7 @@ import { Item } from "src/schemas/item.schema";
 
 export interface ItemInterface{
     create(data: CreateItemDTO): Promise<MessageStatusDTO>;
-    getAll(userId: string): Promise<Item[]>;
+    getAll(userId: string, monthActual: string): Promise<Item[]>;
     getOne(id: string): Promise<Item>;
     update(id: string, data: UpdateItemDTO): Promise<MessageStatusDTO>;
     delete(id: string):Promise<MessageStatusDTO>;

@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
+import { endOfMonth, startOfMonth } from "date-fns";
 import { Model } from 'mongoose';
 import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
 import { UpdateItemDTO } from "src/dtos/item/UpdateItemDTO";
@@ -29,10 +30,24 @@ export class ItemRepository implements ItemInterface{
         };
     }
 
-    async getAll(userId: string): Promise<Item[]> {
-        const items = await this.model.find({ user: userId });
-
-        if(items.length === 0){
+    async getAll(userId: string,monthActual: string): Promise<Item[]> {
+        const month = new Date(`${monthActual} 1, ${new Date().getFullYear()}`).getMonth();
+        if (isNaN(month)) {
+            throw new Error(`Mês inválido: ${monthActual}`);
+        }
+    
+        const startDate = new Date(Date.UTC(new Date().getFullYear(), month, 1));
+        const endDate = new Date(Date.UTC(new Date().getFullYear(), month + 1, 0, 23, 59, 59, 999));
+    
+        const items = await this.model.find({
+            user: userId,
+            createdAt: {
+                $gte: startDate,
+                $lte: endDate,
+            },
+        });
+    
+        if (items.length === 0) {
             throw new NotFoundException("Items não encontrados");
         }
         return items;

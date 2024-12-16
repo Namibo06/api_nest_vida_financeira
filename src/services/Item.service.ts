@@ -16,8 +16,8 @@ export class ItemService implements ItemInterface{
        return await this.repository.create(data);
     }
     
-    async getAll(userId: string): Promise<Item[]> {
-        return await this.repository.getAll(userId);
+    async getAll(userId: string, monthActual: string): Promise<Item[]> {
+        return await this.repository.getAll(userId,monthActual);
     }
     
     async getOne(id: string): Promise<Item> {
