@@ -1,6 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
+import { getGraphicsByInputAndOutputDTO } from "src/dtos/item/getGraphicsByInputAndOutputDTO";
+import { getGraphicsByInputAndOutputRequestDTO } from "src/dtos/item/getGraphicsByInputAndOutputRequestDTO";
 import { UpdateItemDTO } from "src/dtos/item/UpdateItemDTO";
+import { SearchDataRequestDTO } from "src/dtos/searchDataRequestDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { ItemInterface } from "src/interfaces/ItemInterface";
 import { ItemRepository } from "src/repositories/ItemRepository";
@@ -35,4 +38,12 @@ export class ItemService implements ItemInterface{
     async existsById(id: string): Promise<Boolean> {
         return await this.repository.existsById(id);
     }  
+
+    async getGraphicsByInputAndOutput(userId: string,data: getGraphicsByInputAndOutputRequestDTO): Promise<getGraphicsByInputAndOutputDTO>{
+        return await this.repository.getGraphicsByInputAndOutput(userId,data);
+    }
+
+    async searchDataService(userId: string,data: SearchDataRequestDTO): Promise<Item[] | MessageStatusDTO>{
+        return await this.repository.searchData(userId,data);     
+    }
 }

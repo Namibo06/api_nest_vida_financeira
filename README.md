@@ -7,9 +7,12 @@
 #### MongoDB = `npm install mongodb`
 #### Bcrypt = `npm install bcryptjs`
 #### JWT = `npm install --save @nestjs/jwt`
+#### Date FNS = `npm install --save date-fns`
+#### PDFKit = `npm install pdfkit`
+#### Fast CSV = `npm install fast-csv`
+#### Excel Js = `npm install exceljs`
 
-remover life financial
 
-https://api-nest-vida-financeira.onrender.com
+remover life financial, ver se vou precisar usar antes
 
-falta jwt e bcrypt
+Pegar o mes atual, e puxar somente do mês os dados do financeiro, no front e back

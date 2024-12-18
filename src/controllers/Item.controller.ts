@@ -1,6 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
+import { getGraphicsByInputAndOutputDTO } from "src/dtos/item/getGraphicsByInputAndOutputDTO";
+import { getGraphicsByInputAndOutputRequestDTO } from "src/dtos/item/getGraphicsByInputAndOutputRequestDTO";
 import { UpdateItemDTO } from "src/dtos/item/UpdateItemDTO";
+import { SearchDataRequestDTO } from "src/dtos/searchDataRequestDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { AuthGuard } from "src/middlewares/AuthGuard";
 import { Item } from "src/schemas/item.schema";
@@ -80,6 +83,32 @@ export class ItemController{
                 message: error.response,
                 status: error.status
             };
+        }
+    }
+
+    @UseGuards(AuthGuard)
+    @Post('graphics_by_input_and_output/:id')
+    async getGraphicsByInputAndOutput(@Param('id') userId: string, @Body() data: getGraphicsByInputAndOutputRequestDTO): Promise<getGraphicsByInputAndOutputDTO | MessageStatusDTO>{
+        try {
+            return await this.useCase.getGraphicsByInputAndOutput(userId,data);
+        } catch (error) {
+            return {
+                message: error.message,
+                status: error.status
+            }
+        }
+    }
+
+    @UseGuards(AuthGuard)
+    @Post('search_data/:id')
+    async searchData(@Param('id') userId: string, @Body() data: SearchDataRequestDTO): Promise<Item[] | MessageStatusDTO>{
+        try {
+            return await this.useCase.searchDataUseCase(userId,data);
+        } catch (error) {
+            return {
+                message: error.message,
+                status: error.status
+            } 
         }
     }
 }

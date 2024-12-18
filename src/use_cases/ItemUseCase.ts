@@ -1,6 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { CreateItemDTO } from "src/dtos/item/CreateItemDTO";
+import { getGraphicsByInputAndOutputDTO } from "src/dtos/item/getGraphicsByInputAndOutputDTO";
+import { getGraphicsByInputAndOutputRequestDTO } from "src/dtos/item/getGraphicsByInputAndOutputRequestDTO";
 import { UpdateItemDTO } from "src/dtos/item/UpdateItemDTO";
+import { SearchDataRequestDTO } from "src/dtos/searchDataRequestDTO";
 import { MessageStatusDTO } from "src/dtos/user/MessageStatusDTO";
 import { NotFoundException } from "src/exceptions/NotFoundException";
 import { UnprocessableEntityException } from "src/exceptions/UnprocessableEntityException";
@@ -53,5 +56,13 @@ export class ItemUseCase{
         }
 
         return await this.service.delete(id);
+    }
+
+    async getGraphicsByInputAndOutput(userId: string, data: getGraphicsByInputAndOutputRequestDTO): Promise<getGraphicsByInputAndOutputDTO>{
+        return await this.service.getGraphicsByInputAndOutput(userId,data);
+    }
+
+    async searchDataUseCase(userId: string,data: SearchDataRequestDTO): Promise<Item[] | MessageStatusDTO>{
+        return await this.service.searchDataService(userId,data);    
     }
 }
